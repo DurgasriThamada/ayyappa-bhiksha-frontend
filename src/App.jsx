@@ -71,7 +71,8 @@ export default function App() {
     e.preventDefault();
     setAuthError('');
 
-    const endpoint = authMode === 'login' ? '/auth/login' : '/auth/register';
+    // Prefixed with /api to match server.js routes
+    const endpoint = authMode === 'login' ? '/api/auth/login' : '/api/auth/register';
 
     try {
       const response = await fetch(`${API_BASE_URL}${endpoint}`, {
@@ -109,7 +110,8 @@ export default function App() {
   // 2. Fetch Venues
   const fetchVenues = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/venues`);
+      // Prefixed with /api
+      const response = await fetch(`${API_BASE_URL}/api/venues`);
       if (response.ok) {
         const data = await response.json();
         setVenues(data);
@@ -184,7 +186,8 @@ export default function App() {
     if (!newVenue.name || !newVenue.address) return;
 
     try {
-      const response = await fetch(`${API_BASE_URL}/venues`, {
+      // Prefixed with /api
+      const response = await fetch(`${API_BASE_URL}/api/venues`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -214,7 +217,8 @@ export default function App() {
   // 5. Admin Update Venue Status
   const handleUpdateStatus = async (venueId, newStatus) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/venues/${venueId}/status`, {
+      // Prefixed with /api
+      const response = await fetch(`${API_BASE_URL}/api/venues/${venueId}/status`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
